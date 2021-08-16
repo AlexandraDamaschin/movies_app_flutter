@@ -2,10 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:movies_app_tmdb/src/models/movie_model.dart';
 import '../blocs/movies_bloc.dart';
 
-class MovieList extends StatelessWidget {
+class MovieList extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MovieListState();
+  }
+}
+
+class MovieListState extends State<MovieList> {
+  @override
+  void initState() {
+    super.initState();
+    bloc.fetchAllMovies();
+  }
+
+  @override
+  void dispose() {
+    bloc.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    bloc.fetchAllMovies();
     return Scaffold(
       appBar: AppBar(
         title: Text('Popular Movies'),
